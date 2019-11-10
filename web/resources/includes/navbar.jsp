@@ -1,7 +1,7 @@
 <header>      
       <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.jsp"><img class="d-inline-block align-top" src="resources/img/icon_amarelo.png" width="30" height="30"> CINEMEP</a>          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navgation">
+          <a class="navbar-brand" href="index.jsp"><img class="d-inline-block align-top" src="../resources/img/icon_amarelo.png" width="30" height="30"> CINEMEP</a>          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navgation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">         

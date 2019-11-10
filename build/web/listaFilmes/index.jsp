@@ -1,7 +1,6 @@
-<%@include file="resources/includes/header.jsp" %>
-<%@include file="resources/includes/navbar.jsp" %>
-<jsp:useBean id="colecao_generos" class="ColecoesTeste.ColecaoDeGeneros" />
-<jsp:useBean id="colecao_filmes" class="ColecoesTeste.ColecaoDeFilmes" />
+<%@include file="../resources/includes/header.jsp" %>
+<%@include file="../resources/includes/navbar.jsp" %>
+<%@include file="dao.jsp" %>
 
 <div class="row">
        <div class="col-md-12"> 
@@ -29,8 +28,8 @@
                             </a>
                             <div class="collapse" id="opcoes-class">
                                 <div class="d-flex">   
-                                    <c:forEach var="gen" items="${colecao_generos.getGeneros()}" varStatus="i">
-                                        <a class="nav-link ${i.index == 0 ? "active" : ""}" href="lista-filmes.jsp?gen=${gen.getGen_Descricao()}">${gen.getGen_Descricao()} (${gen.getGen_Qtd_Fil()})</a>
+                                    <c:forEach var="genero" items="${generos.rows}" varStatus="i">
+                                        <a class="nav-link ${i.index == 0 ? "active" : ""}" href="lista-filmes.jsp?gen=${genero.Gen_Descricao}">${genero.Gen_Descricao} (${genero.qtd_fil})</a>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -81,22 +80,22 @@
                         <div class="card-column bg-light">
                             
                             <!-- Filme -->
-                            <c:forEach var="filme" items="${colecao_filmes.filmes}">
+                            <c:forEach var="filme" items="${filmes.rows}">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
                                             <!-- Foto do Filme -->
                                             <div class="col-md-2 d-flex align-items-center">
-                                                <img class="rounded" src="${filme.getFil_Foto()}" width="auto" height="250">
+                                                <img class="rounded" src="../resources/${filme.Fil_Foto}" width="auto" height="250">
                                             </div>
 
                                             <!-- Detalhes do Filme -->
                                             <div class="col-md-10">
-                                                <small class="text-small">${filme.getFil_Tempo()} / ${filme.getFil_GeneroDesc()} / ${filme.getFil_Lancamento()}</small>
-                                                <h3 class="card-title text-uppercase">${filme.getFil_Titulo()} <img src="${filme.getImage_Fil_Classificacao()}" style="height:32px; width:auto;" /></h3>
-                                                <p class="card-text">${filme.getFil_Sinopse()}</p>
-                                                <p class="card-text text-warning">*** Avaliações
-                                                <a href="${filme.getFil_Link()}"><button class="btn btn-primary">Ver Mais</button></a>
+                                                <small class="text-small">${filme.Fil_Tempo} / ${filme.Fil_GeneroDesc} / ${filme.Fil_Lancamento}</small>
+                                                <h3 class="card-title text-uppercase">${filme.Fil_Titulo} <img src="${"SOURCE"}" style="height:32px; width:auto;" /></h3>
+                                                <p class="card-text">${filme.Fil_Sinopse}</p>
+                                                <p class="card-text text-warning"> ${filme.media} - ${filme.qtd_com} Avaliação(s)
+                                                <a href="${"LINK"}"><button class="btn btn-primary">Ver Mais</button></a>
                                                 </p>
                                             </div>
                                         </div>
@@ -114,5 +113,5 @@
             </div>                
         </div>
     <!-- FIM: Lista de Filmes-->
-<%@include file="resources/includes/footer.jsp" %>
+<%@include file="../resources/includes/footer.jsp" %>
 

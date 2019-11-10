@@ -1,9 +1,6 @@
-<%@page import="Model.Filme"%>
-<%@include file="resources/includes/header.jsp" %>
-<%@include file="resources/includes/navbar.jsp" %>
-<jsp:useBean id="colecao_filmes" class="ColecoesTeste.ColecaoDeFilmes" />
-
-<c:set var="filme" value="${ colecao_filmes.getFilmeById(param.id) }" scope="request" />
+<%@include file="../resources/includes/header.jsp" %>
+<%@include file="../resources/includes/navbar.jsp" %>
+<%@include file="dao.jsp" %>
 
 <div class="row">
     <div class="col-md-12">
@@ -52,5 +49,53 @@
             </div>
     </div>
 </div>  
+<div class="row">
+    <div class="col-md-12">
+        
+        <!-- Bloco de Comentários -->
+        <div class='card bg-light' id='bloco_cmt'>
+            <div class='card-header text-primary'><h2 class='card-title'>Avaliações (QUANTIDADE)</h2></div>
+                <div class='card-body'>                    
+                    <div class='card-columns bg-light'>
+                        
+                            <!-- Cards de Comentários -->
+                            <c:forEach var="comentario" items="${filme.comentarios}">
+                                <div class='card bg-class'>
+                                    <div class='card-body'>	
+                                    <h2 class='card-title text-warning d-inline'>NOTA</h2>
+                                    <h3 class='card-subtitle text-muted d-inline'>NOTA_DESCRIÇÃO</h3>
+
+                                    <!-- Menu Opções -->
+                                    <div class='dropright d-inline ml-2'>
+                                        <button type='button' class='btn btn-secondary dropdown-toggle' id='opComentario_NUMERO' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>+</button>
+                                        <div class='dropdown-menu' aria-labelledby='opComentario$com_cod'>
+                                            <button type='button' class='dropdown-item' data-toggle='modal' data-target='#mdl_confAlt".$com_cod."'>Editar</button>
+                                            <button type='button' class='dropdown-item' data-toggle='modal' data-target='#mdl_confExc".$com_cod."'>Excluir</button>
+                                        </div>
+                                     </div>
+
+                                    <!-- Infor Comentário-->
+                                    <blockquote class='blockquote mb-0'>
+                                        <p>COMENTARIO</p>
+                                        <footer class='blockquote-footer'>
+                                                USER<cite title='Título da fonte'>, DATA</cite>									
+                                        </footer> 
+                                    </blockquote>
+
+                                    <!-- Linha Divisória -->
+                                    <hr>
+
+                                    <!-- Links para Interação com os Comentários -->
+                                    <a href='BD/curtirComentario.php?fil_id=$filme_id&com_cod=$com_cod' class='card-link'>Curti! (QTD_CURTI)</a>
+                                    <a href='BD/descurtirComentario.php?fil_id=$filme_id&com_cod=$com_cod' class='card-link'>Não Gostei! (QTD_DISLIKE)</a>
+
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
-<%@include file="resources/includes/footer.jsp" %>
+<%@include file="../resources/includes/footer.jsp" %>

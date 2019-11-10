@@ -3,6 +3,7 @@
 <jsp:useBean id="colecao_filmes" class="ColecoesTeste.ColecaoDeFilmes" />
 
         <!-- Carrosel de Imagens Inicial -->
+        <!-- Exibe Wallpapers Ativos dos Filmes -->
         <div class="row">
             <div class="col-md-12"> 
                 <div id="carroselWallpapers" class="carousel slide" data-ride="carousel" data-interval="3000" style="height:100%">

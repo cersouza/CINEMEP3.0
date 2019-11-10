@@ -7,13 +7,13 @@
         <title>CINEMEP</title>
         
         <!-- Bootstrap 4.0 CSS -->
-        <link rel="stylesheet" href="resources/css/bootstrap-css/bootstrap.min.css">
+        <link rel="stylesheet" href="../resources/css/bootstrap-css/bootstrap.min.css">
         
         <!-- CSS Interno -->
-        <link rel="stylesheet" href="resources/css/estilos_interno.css" />
+        <link rel="stylesheet" href="../resources/css/estilos_interno.css" />
         
         <!-- Ícone CINEMEP-->
-        <link rel="shortcut icon" href="resources/img/icon_amarelo.png" />
+        <link rel="shortcut icon" href="../resources/img/icon_amarelo.png" />
     </head>
     <body>
     

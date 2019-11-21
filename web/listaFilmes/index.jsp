@@ -18,7 +18,7 @@
                        
                        <!-- Botão TODOS os Filmes-->
                        <li class="nav-item">
-                           <a class="nav-link" href="listaFilmes.jsp">Todos</a>
+                           <a class="nav-link" href="../listaFilmes">Todos</a>
                        </li>
                        
                        <!-- Botão para seleção por Gênero -->
@@ -29,14 +29,14 @@
                             <div class="collapse" id="opcoes-class">
                                 <div class="d-flex">   
                                     <c:forEach var="genero" items="${generos.rows}" varStatus="i">
-                                        <a class="nav-link ${i.index == 0 ? "active" : ""}" href="lista-filmes.jsp?gen=${genero.Gen_Descricao}">${genero.Gen_Descricao} (${genero.qtd_fil})</a>
+                                        <a class="nav-link ${genero.Gen_Descricao == param.gen ? "active" : ""}" href="index.jsp?gen=${genero.Gen_Descricao}" data-toggle="tooltip" title="${genero.qtd_fil}" data-placement="bottom">${genero.Gen_Descricao}</a>
                                     </c:forEach>
                                 </div>
                             </div>
                        </li>
                        
                        <!-- Botão Para Ordenação de Filmes-->
-                       <li class="nav-item mx-2">
+                       <li class="nav-item mx-2 d-none">
                             <div class="dropdown show">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Ordenar
@@ -55,8 +55,8 @@
                         </li>
                         
                         <!-- Campo de Pesquisa de Filme por Título -->
-                        <form class="form-inline" method="GET" action="listaFilmes.jsp">
-                            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Pesquisar Título Filme" aria-label="Pesquisar">
+                        <form class="form-inline" method="GET" action="index.jsp">
+                            <input class="form-control mr-sm-2" type="search" name="pesquisa" placeholder="Pesquisar Título Filme" aria-label="Pesquisar">
                             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pesquisar</button>
                         </form>
                     </ul>
@@ -73,7 +73,7 @@
             <div class="card bg-light">
                 
                 <div class="card-header text-primary">
-                    <h3 class="card-title text-capitalize">Título Gênero / Ver todos os filmes</h3>
+                    <h3 class="card-title text-capitalize"><c:out value="${param.gen}" default="Ver todos os filmes" /></h3>
                 </div>
                 
                     <div class="card-body">
@@ -91,11 +91,25 @@
 
                                             <!-- Detalhes do Filme -->
                                             <div class="col-md-10">
-                                                <small class="text-small">${filme.Fil_Tempo} / ${filme.Fil_GeneroDesc} / ${filme.Fil_Lancamento}</small>
-                                                <h3 class="card-title text-uppercase">${filme.Fil_Titulo} <img src="${"SOURCE"}" style="height:32px; width:auto;" /></h3>
+                                                <!-- Formatando Data de Lançamento -->
+                                                <fmt:formatDate var="Fil_Lanc" value="${filme.Fil_Lancamento}" pattern="dd-MMMM-yyyy"/>
+                                                <small class="text-small">${filme.Fil_Tempo} / <a href="index.jsp?gen=${filme.Fil_GeneroDesc}" data-toggle="tooltip" title="Ir para Filmes de ${filme.Fil_GeneroDesc}">${filme.Fil_GeneroDesc}</a> / ${Fil_Lanc}</small>
+                                                <h3 class="card-title text-uppercase">${filme.Fil_Titulo} <img src="../resources/img/classificacao_${filme.Fil_Classificacao}.png" style="height:32px; width:auto;" /></h3>
                                                 <p class="card-text">${filme.Fil_Sinopse}</p>
-                                                <p class="card-text text-warning"> ${filme.media} - ${filme.qtd_com} Avaliação(s)
-                                                <a href="${"LINK"}"><button class="btn btn-primary">Ver Mais</button></a>
+                                                
+                                                <!-- Caso NÃO TENHA avaliações -->
+                                                <c:if test="${filme.qtd_com < 1}">
+                                                    <p class="card-text text-warning"> Ainda não avaliado</p>
+                                                </c:if>
+                                                
+                                                <!-- Caso TENHA avaliações -->
+                                                <c:if test="${filme.qtd_com >= 1}">
+                                                    <!-- Formatando Média de Avaliações -->
+                                                    <fmt:formatNumber var="fil_media" value="${filme.media}" maxFractionDigits="2" />
+                                                    <p class="card-text text-warning"> ${fil_media} - ${filme.qtd_com} ${filme.qtd_com <= 1 ? "Avaliação" : "Avaliações"}</p>
+                                                </c:if> 
+                                                    
+                                                <a href="../filme/index.jsp?id=${filme.Fil_Codigo}"><button class="btn btn-primary">Ver Mais</button></a>
                                                 </p>
                                             </div>
                                         </div>

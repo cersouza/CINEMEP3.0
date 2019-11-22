@@ -35,6 +35,7 @@
 
         SELECT c.*,
         (SELECT u.Usu_Nome FROM usuario u WHERE u.Usu_Codigo = c.Com_Usuario) as 'Usu_Nome',
+        (SELECT COUNT(b.Com_Codigo) FROM comentario b WHERE b.Com_Parent = c.Com_Codigo) as 'qtd_addCom',
         (SELECT COUNT(r.RC_Usuario) FROM reacaocomentario r WHERE r.Rc_Comentario = c.Com_Codigo and r.Rc_like = 'True') as 'qtd_like',
         (SELECT COUNT(r.RC_Usuario) FROM reacaocomentario r WHERE r.Rc_Comentario = c.Com_Codigo and r.Rc_Dislike = 'True') as 'qtd_dislike'
         FROM comentario c WHERE c.Com_Filme = ?;
@@ -43,3 +44,4 @@
 
     </sql:query>
 </c:if>
+        

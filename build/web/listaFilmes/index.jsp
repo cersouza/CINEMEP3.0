@@ -92,7 +92,7 @@
                                             <!-- Detalhes do Filme -->
                                             <div class="col-md-10">
                                                 <!-- Formatando Data de Lançamento -->
-                                                <fmt:formatDate var="Fil_Lanc" value="${filme.Fil_Lancamento}" pattern="dd-MMMM-yyyy"/>
+                                                <fmt:formatDate var="Fil_Lanc" value="${filme.Fil_Lancamento}" pattern="dd 'de' MMMM',' yyyy"/>
                                                 <small class="text-small">${filme.Fil_Tempo} / <a href="index.jsp?gen=${filme.Fil_GeneroDesc}" data-toggle="tooltip" title="Ir para Filmes de ${filme.Fil_GeneroDesc}">${filme.Fil_GeneroDesc}</a> / ${Fil_Lanc}</small>
                                                 <h3 class="card-title text-uppercase">${filme.Fil_Titulo} <img src="../resources/img/classificacao_${filme.Fil_Classificacao}.png" style="height:32px; width:auto;" /></h3>
                                                 <p class="card-text">${filme.Fil_Sinopse}</p>

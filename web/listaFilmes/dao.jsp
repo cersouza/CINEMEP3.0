@@ -7,8 +7,8 @@
         <c:when test="${not empty param.gen}">
             SELECT f.*,
             (SELECT g.Gen_Descricao FROM genero g WHERE g.Gen_Codigo = f.Fil_Genero) as 'Fil_GeneroDesc',
-            (SELECT COUNT(c.Com_Codigo) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo) as 'qtd_com',
-            (SELECT AVG(c.Com_Avaliacao) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo) as 'media'
+            (SELECT COUNT(c.Com_Codigo) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo and c.Com_Situacao = 'A') as 'qtd_com',
+            (SELECT AVG(c.Com_Avaliacao) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo and c.Com_Situacao = 'A') as 'media'
             FROM filmes f WHERE f.Fil_Genero = (SELECT g.Gen_Codigo FROM genero g WHERE g.Gen_Descricao = ?);
             
             <sql:param value="${param.gen}" /> 
@@ -16,8 +16,8 @@
         <c:when test="${not empty param.pesquisa}">
                 SELECT f.*,
                 (SELECT g.Gen_Descricao FROM genero g WHERE g.Gen_Codigo = f.Fil_Genero) as 'Fil_GeneroDesc',
-                (SELECT COUNT(c.Com_Codigo) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo) as 'qtd_com',
-                (SELECT AVG(c.Com_Avaliacao) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo) as 'media'
+                (SELECT COUNT(c.Com_Codigo) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo and c.Com_Situacao = 'A') as 'qtd_com',
+                (SELECT AVG(c.Com_Avaliacao) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo and c.Com_Situacao = 'A') as 'media'
                 FROM filmes f WHERE f.Fil_Titulo LIKE CONCAT('%', ?, '%');
             
             <sql:param value="${param.pesquisa}" /> 
@@ -25,8 +25,8 @@
         <c:otherwise>
             SELECT f.*,
             (SELECT g.Gen_Descricao FROM genero g WHERE g.Gen_Codigo = f.Fil_Genero) as 'Fil_GeneroDesc',
-            (SELECT COUNT(c.Com_Codigo) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo) as 'qtd_com',
-            (SELECT AVG(c.Com_Avaliacao) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo) as 'media'
+            (SELECT COUNT(c.Com_Codigo) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo and c.Com_Situacao = 'A') as 'qtd_com',
+            (SELECT AVG(c.Com_Avaliacao) FROM comentario c WHERE c.Com_Filme = f.Fil_Codigo and c.Com_Situacao = 'A') as 'media'
             FROM filmes f;
         </c:otherwise>
     </c:choose>

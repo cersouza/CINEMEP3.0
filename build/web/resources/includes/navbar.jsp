@@ -32,7 +32,7 @@
                       Olá ${sessionScope.Usu_Nome}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="opcoes_login">
-                      <a class="dropdown-item" href="alt-cadastro.php">Minha Conta</a>
+                      <!-- a class="dropdown-item" href="alt-cadastro.php">Minha Conta</a -->
                       <hr />
                       <a class="dropdown-item" href="../login/index.jsp?sair=true">Sair</a>                      
                   </div>

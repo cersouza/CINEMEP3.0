@@ -57,7 +57,26 @@
                                                         <c:if test="${filme.qtd_com >= 1}">
                                                             <!-- Formatando Média de Avaliações -->
                                                             <fmt:formatNumber var="fil_media" value="${filme.media}" maxFractionDigits="2" />
-                                                            <h2 class="text-warning d-flex align-items-center"> ${fil_media} </h2>                                                           
+                                                            <!-- Inteiro da Média para Cáculos -->
+                                                            <fmt:parseNumber var="fil_media_int" value="${fil_media}" integerOnly="true" type="number" />
+                                                            
+                                                            <h2 class="text-warning d-flex align-items-center">
+                                                                <!-- Compondo a Nota/Estrelas -->
+                                                                 <c:forEach begin="1" end="5" varStatus="i">
+                                                                     <c:choose>
+                                                                       <c:when test="${i.index == fil_media_int + 1 && i.index - 0.5 <= filme.media}">
+                                                                           <i class="fa fa-star-half-full"></i>
+                                                                       </c:when>
+                                                                       <c:when test="${i.index <= filme.media}">
+                                                                           <i class="fa fa-star"></i>
+                                                                       </c:when>       
+                                                                       <c:otherwise>
+                                                                           <i class="fa fa-star-o"></i>
+                                                                       </c:otherwise>
+                                                                     </c:choose>
+                                                                </c:forEach>
+                                                                <span class="text-muted"> - (${fil_media}) </span>
+                                                            </h2>                                                           
                                                         </c:if>
                                                      </td>                                                        
                                                     </tr>
@@ -84,33 +103,76 @@
                                     <!-- h2 class='card-title text-warning d-inline'>**</h2 -->
                                     
                                     <!-- Estrelas -->
-                                    <c:forEach begin="1" end="${com.Com_Avaliacao}">
-                                        <img src="../resources/img/star.png" class="mr-2" style="height:30px; width:auto;"/>
-                                    </c:forEach>
+                                    <span class="h3 text-warning">
+                                        <c:forEach begin="1" end="${com.Com_Avaliacao}">
+                                            <!-- img src="../resources/img/star.png" class="mr-2" style="height:30px; width:auto;"/ -->
+                                            <i class="fa fa-star"></i>
+                                        </c:forEach>
+                                    </span>
                                         
                                     <!-- h3 class='card-subtitle text-muted d-inline'>NOTA_DESCRIÇÃO</h3 -->
-
+                                    
                                     <c:if test="${com.Com_Usuario == sessionScope.Usu_Codigo}">
                                         <!-- Menu Opções -->
                                         <div class='float-right dropright d-inline ml-2'>
                                             <button type='button' class='btn btn-secondary' id='opComentario_NUMERO' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class="fa fa-bars" aria-hidden="false"></i></button>
                                             <div class='dropdown-menu' aria-labelledby='opComentario$com_cod'>
-                                                <!-- a href="reagirComentario.jsp?id=${filme.Fil_Codigo}&editar=${com.Com_Codigo}" type='button' class='dropdown-item'>Editar</a -->
+                                                <a class='dropdown-item' href='#editaCom_${com.Com_Codigo}' role='button' data-toggle='collapse'>Editar</a>
                                                 <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&excluir=${com.Com_Codigo}' type='button' class='dropdown-item'>Excluir</a>
                                             </div>
                                          </div>
-                                    </c:if>
+                                            
+                                        <div class="accordion" id='comBloco_${com.Com_Codigo}'>
+                                        <!-- Info Comentário-->
+                                        <div id="infoCom_${com.Com_Codigo}" class="collapse show"data-parent='#comBloco_${com.Com_Codigo}'>
+                                            <blockquote class='blockquote mb-0'>
+                                                <p>${com.Com_Comentario}</p>
+                                                <footer class='blockquote-footer d-flex justify-content-end'>
+                                                    <!-- Formatando Data Comentário -->
+                                                    <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy 'às' hh:mm"/>
+                                                    ${com.Usu_Nome}
+                                                    <cite title='Título da fonte'>, ${Com_Data}</cite>									
+                                                </footer> 
+                                            </blockquote>
+                                        </div>
 
-                                    <!-- Info Comentário-->
-                                    <blockquote class='blockquote mb-0'>
-                                        <p>${com.Com_Comentario}</p>
-                                        <footer class='blockquote-footer d-flex justify-content-end'>
-                                            <!-- Formatando Data Comentário -->
-                                            <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy 'às' hh:mm"/>
-                                            ${com.Usu_Nome}
-                                            <cite title='Título da fonte'>, ${Com_Data}</cite>									
-                                        </footer> 
-                                    </blockquote>
+                                        <!-- Formulário para Edição de Comentário -->
+                                        <div id="editaCom_${com.Com_Codigo}" class="collapse" data-parent='#comBloco_${com.Com_Codigo}'>
+                                            <form id="form_editaCom_${com.Com_Codigo}" class="form-group text-right" method="POST" action="reagirComentario.jsp">
+                                                
+                                                <p class="text-left">Avaliação:</p>                                                
+                                                <select name="Fil_Avaliacao" class="form-control" form="form_editaCom_${com.Com_Codigo}">
+                                                    <option value="1" ${com.Com_Avaliacao == 1 ? "selected" : ""}>1 - Péssimo</option>
+                                                    <option value="2" ${com.Com_Avaliacao == 2 ? "selected" : ""}>2 - Ruim</option>
+                                                    <option value="3" ${com.Com_Avaliacao == 3 ? "selected" : ""}>3 - Mais ou Menos</option>
+                                                    <option value="4" ${com.Com_Avaliacao == 4 ? "selected" : ""}>4 - Bom</option>
+                                                    <option value="5" ${com.Com_Avaliacao == 5 ? "selected" : ""}>5 - Excelente</option>
+                                                </select>
+                                                
+                                                <p class="text-left">Comentário:</p>
+                                                <textarea class="form-control" rows="5" name="editaComentario" placeholder="Digite seu comentário aqui..." required>${com.Com_Comentario}</textarea><br>
+                                                <input type="hidden" name="Com_Codigo"  value="${com.Com_Codigo}"/>
+                                                <input type="hidden" name="id" value="${filme.Fil_Codigo}" />                                            
+                                                <input class="btn btn-secondary" type="reset" value="CANCELAR"  data-target='#infoCom_${com.Com_Codigo}' data-toggle='collapse' aria-expanded='true'/>
+                                                <input class="btn btn-primary" type="submit" value="SALVAR" form="form_editaCom_${com.Com_Codigo}" />
+                                            </form>
+                                        </div>
+                                    </div>      
+                                    </c:if>
+                                    
+                                    <!-- Se NÃO HOUVER Sessão Ativa, ou Comentário NÃO FOR do usuário atual -->
+                                    <c:if test="${empty sessionScope.Usu_Codigo || com.Com_Usuario != sessionScope.Usu_Codigo}">
+                                        <!-- Info Comentário-->
+                                        <blockquote class='blockquote mb-0'>
+                                            <p>${com.Com_Comentario}</p>
+                                            <footer class='blockquote-footer d-flex justify-content-end'>
+                                                <!-- Formatando Data Comentário -->
+                                                <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy 'às' hh:mm"/>
+                                                ${com.Usu_Nome}
+                                                <cite title='Título da fonte'>, ${Com_Data}</cite>									
+                                            </footer> 
+                                        </blockquote>
+                                    </c:if>
 
                                     <!-- Linha Divisória -->
                                     <hr>
@@ -179,7 +241,7 @@
                                                 (SELECT u.Usu_Nome FROM usuario u WHERE u.Usu_Codigo = Com_Usuario) as 'Usu_Nome',
                                                 (SELECT COUNT(r.RC_Usuario) FROM reacaocomentario r WHERE r.Rc_Comentario = c.Com_Codigo and r.Rc_like = 'True') as 'qtd_like',
                                                 (SELECT COUNT(r.RC_Usuario) FROM reacaocomentario r WHERE r.Rc_Comentario = c.Com_Codigo and r.Rc_dislike = 'True') as 'qtd_dislike'
-                                                FROM comentario c WHERE c.Com_Parent = ? ;
+                                                FROM comentario c WHERE c.Com_Parent = ? and c.Com_Situacao = 'A';
 
                                                 <sql:param value="${com.Com_Codigo}" />
                                             </sql:query> 
@@ -192,7 +254,7 @@
                                                       </p>
                                                     </div>
                                                     <div class="card-footer">
-                                                      <small class="text-muted">Postado em <fmt:formatDate value="${addCom.Com_Data}" pattern="dd 'de' MMMM',' yyyy"/> </i></small>
+                                                      <small class="text-muted">Postado em <fmt:formatDate value="${addCom.Com_Data}" pattern="dd 'de' MMMM',' yyyy"/> </i></small><br>
                                                       
                                                       <c:if test="${not empty sessionScope.Usu_Codigo}">
                                                             <sql:query dataSource="${conexao}" var="addRc">
@@ -268,29 +330,37 @@
                 
     <!-- Bloco Para Comentários -->
     <div class="card bg-light">
-        <div class="card-header text-center">
-            <h3 class="card-title">Adicionar Avaliação</h3>
-            <button class="btn btn-primary" data-toggle="collapse" data-target="#frm-comentario">Comentar</button>
-        </div>
-        <div class="card-body collapse" id="frm-comentario">									
-            <form class="form-group" method="POST" action="reagirComentario.jsp">
-                <label for="nota">Avaliação:</label>
-                <select name="Fil_Avaliacao" class="form-control w-50" id="nota">
-                    <option value="1">1 - Péssimo</option>
-                    <option value="2">2 - Ruim</option>
-                    <option value="3">3 - Mais ou Menos</option>
-                    <option value="4">4 - Bom</option>
-                    <option value="5">5 - Excelente</option>
-                </select>
+        <!-- Testa se usuário Já comentou - Variável instanciada no DAO-->
+        <c:if test="${jaComentou && not empty sessionScope.Usu_Codigo}">
+            <div class="card-body text-center text-primary">
+                Você já Avaliou este Filme ; )
+            </div>
+        </c:if>
+        <c:if test="${not jaComentou || empty sessionScope.Usu_Codigo}">
+            <div class="card-header text-center">
+                <h3 class="card-title">Adicionar Avaliação</h3>
+                <button class="btn btn-primary" data-toggle="collapse" data-target="#frm-comentario">Comentar</button>
+            </div>
+            <div class="card-body collapse" id="frm-comentario">									
+                <form class="form-group" method="POST" action="reagirComentario.jsp">
+                    <label for="nota">Avaliação:</label>
+                    <select name="Fil_Avaliacao" class="form-control w-50" id="nota">
+                        <option value="1">1 - Péssimo</option>
+                        <option value="2">2 - Ruim</option>
+                        <option value="3">3 - Mais ou Menos</option>
+                        <option value="4">4 - Bom</option>
+                        <option value="5">5 - Excelente</option>
+                    </select>
 
-                <label for="comment">Comentário:</label>
-                <textarea class="form-control" rows="5" id="comment"  name="Comentario" placeholder="Digite seu comentário aqui..." required></textarea><br>
+                    <label for="comment">Comentário:</label>
+                    <textarea class="form-control" rows="5" id="comment"  name="Comentario" placeholder="Digite seu comentário aqui..." required></textarea><br>
 
-                <input type="hidden" name="Fil_Codigo" value="${filme.Fil_Codigo}">
-                <input type="hidden" name="id" value="${filme.Fil_Codigo}">
-                <input class="btn btn-primary" type="submit" value="Publicar">
-            </form>
-        </div>
+                    <input type="hidden" name="Fil_Codigo" value="${filme.Fil_Codigo}">
+                    <input type="hidden" name="id" value="${filme.Fil_Codigo}">
+                    <input class="btn btn-primary" type="submit" value="Publicar">
+                </form>
+            </div>
+        </c:if>  
 </div>
 
 <!-- Mensagens de ERRO -->

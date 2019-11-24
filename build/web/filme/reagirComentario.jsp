@@ -12,11 +12,25 @@
 
     <!-- Recuperando Data Atual -->
     <%  String agora = sdf.format(new Date()); %>
+    
+    <c:if test="${not empty param.editaComentario}">
+        <sql:update dataSource="${conexao}" var="com">
 
+            UPDATE comentario c SET c.Com_Comentario=?, c.Com_Avaliacao = ?, c.Com_Data=? WHERE c.Com_Codigo = ? and c.Com_Usuario = ?;
+
+            <sql:param value="${param.editaComentario}" /> 
+            <sql:param value="${param.Fil_Avaliacao}" />
+            <sql:param value="<%= agora.toString() %>" />
+            <sql:param value="${param.Com_Codigo}" />
+            <sql:param value="${sessionScope.Usu_Codigo}" />       
+
+        </sql:update>
+    </c:if>
+    
     <c:if test="${not empty param.excluirAddCom}">
         <sql:update dataSource="${conexao}" var="com">
 
-            DELETE c.* FROM comentario c WHERE c.Com_Codigo = ? and c.Com_Usuario = ?;
+            UPDATE comentario c SET c.Com_Situacao='I' WHERE c.Com_Codigo = ? and c.Com_Usuario = ?;
 
             <sql:param value="${param.excluirAddCom}" /> 
             <sql:param value="${sessionScope.Usu_Codigo}" />       
@@ -29,7 +43,7 @@
         <sql:update dataSource="${conexao}">
 
             INSERT INTO comentario (Com_Usuario, Com_Comentario, Com_Gostou, Com_NaoGostou, Com_Data, Com_Situacao, Com_Parent) 
-            Values (?, ?, 0, 0, ?, 'T', ?)
+            Values (?, ?, 0, 0, ?, 'A', ?)
 
             <sql:param value="${sessionScope.Usu_Codigo}" />
             <sql:param value="${param.addComentario}" />  
@@ -52,9 +66,9 @@
         </sql:query>
 
         <c:if test="${not empty com.rows}">
-            <sql:update dataSource="${conexao}" var="com">
-
-                DELETE c.* FROM comentario c WHERE c.Com_Codigo = ? and c.Com_Usuario = ?;
+            <sql:update dataSource="${conexao}">
+                
+                UPDATE comentario c SET c.Com_Situacao='I' WHERE c.Com_Codigo = ? and c.Com_Usuario = ?;
 
                 <sql:param value="${param.excluir}" /> 
                 <sql:param value="${sessionScope.Usu_Codigo}" />       
@@ -94,7 +108,7 @@
             <sql:update dataSource="${conexao}">
 
             INSERT INTO comentario (Com_Usuario, Com_Comentario, Com_Gostou, Com_NaoGostou, Com_Avaliacao, Com_Filme, Com_Data, Com_Situacao) 
-            Values (?, ?, 0, 0, ?, ?, ?, 'T')
+            Values (?, ?, 0, 0, ?, ?, ?, 'A')
 
             <sql:param value="${sessionScope.Usu_Codigo}" />
             <sql:param value="${param.Comentario}" />                

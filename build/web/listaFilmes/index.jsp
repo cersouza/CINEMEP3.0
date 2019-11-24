@@ -106,7 +106,30 @@
                                                 <c:if test="${filme.qtd_com >= 1}">
                                                     <!-- Formatando Média de Avaliações -->
                                                     <fmt:formatNumber var="fil_media" value="${filme.media}" maxFractionDigits="2" />
-                                                    <p class="card-text text-warning"> ${fil_media} - ${filme.qtd_com} ${filme.qtd_com <= 1 ? "Avaliação" : "Avaliações"}</p>
+                                                
+                                                    <!-- Inteiro da Média para Cáculos -->
+                                                    <fmt:parseNumber var="fil_media_int" value="${fil_media}" integerOnly="true" type="number" />
+                                                        
+                                                    <p class="card-text text-warning">
+                                                        
+                                                    <!-- Compondo a Nota/Estrelas -->
+                                                         <c:forEach begin="1" end="5" varStatus="i">
+                                                             <c:choose>
+                                                               <c:when test="${i.index == fil_media_int + 1 && i.index - 0.5 <= filme.media}">
+                                                                   <i class="fa fa-star-half-full"></i>
+                                                               </c:when>
+                                                               <c:when test="${i.index <= filme.media}">
+                                                                   <i class="fa fa-star"></i>
+                                                               </c:when>       
+                                                               <c:otherwise>
+                                                                   <i class="fa fa-star-o"></i>
+                                                               </c:otherwise>
+                                                             </c:choose>
+                                                        </c:forEach>
+                                                        
+                                                        <!-- Exibindo Quanidade de Avaliações -->
+                                                        - ${filme.qtd_com} ${filme.qtd_com <= 1 ? "Avaliação" : "Avaliações"}
+                                                    </p>
                                                 </c:if> 
                                                     
                                                 <a href="../filme/index.jsp?id=${filme.Fil_Codigo}"><button class="btn btn-primary">Ver Mais</button></a>

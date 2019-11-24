@@ -2,7 +2,7 @@
 <%@include file="../resources/includes/navbar.jsp" %>
 <%@include file="dao.jsp" %>
 
-<!-- Criando um Array de Cores (usado nos Coment·rios de Coment·rios) -->
+<!-- Criando um Array de Cores (usado nos Coment√°rios de Coment√°rios) -->
 <c:set var="cores" value="${['primary','secondary', 'success']}" />
 
 <div class="row">
@@ -18,18 +18,18 @@
         <div class="card-body">
             <div class="row">
                     <div class="col-md-4 d-flex justify-content-center align-items-center">								
-                            <img class="rounded" src="../resources/${filme.Fil_Foto}" width="auto" height="400">
+                            <img class="rounded" src="../resources/img/filmes/${filme.Fil_Foto}" width="auto" height="400">
                             <!-- img class="card-img-top" src="${filme.Fil_Wallpaper}" -->
                     </div>
 
                     <div class="col-md-8">
                             <table class="table">
                                     <tbody>
-                                                    <tr><th>TÌtulo:</th><td>${filme.Fil_Titulo}</td></tr>
+                                                    <tr><th>T√≠tulo:</th><td>${filme.Fil_Titulo}</td></tr>
                                                     
-                                                    <!-- Formatando Data de LanÁamento -->
+                                                    <!-- Formatando Data de Lan√ßamento -->
                                                     <fmt:formatDate var="Fil_Lanc" value="${filme.Fil_Lancamento}" pattern="dd 'de' MMMM',' yyyy"/>
-                                                    <tr><th>Data LanÁamento:</th><td>${Fil_Lanc}</td></tr>
+                                                    <tr><th>Data Lan√ßamento:</th><td>${Fil_Lanc}</td></tr>
                                                     
                                                     
                                                             <c:if test="${not empty elenco.rows}">
@@ -46,18 +46,18 @@
                                                             <td><p>${filme.Fil_Sinopse}</p></td>
                                                     </tr>
 
-                                                    <tr><th>Nota MÈdia Usu·rios:<br></th>
+                                                    <tr><th>Nota M√©dia Usu√°rios:<br></th>
                                                         <td>
-                                                            <!-- Caso N√O TENHA avaliaÁıes -->
+                                                            <!-- Caso N√ÉO TENHA avalia√ß√µes -->
                                                         <c:if test="${filme.qtd_com < 1}">
-                                                            <p class="text-warning"><strong>Ainda n„o Avaliado!</strong></p>
+                                                            <p class="text-warning"><strong>Ainda n√£o Avaliado!</strong></p>
                                                         </c:if>
 
-                                                        <!-- Caso TENHA avaliaÁıes -->
+                                                        <!-- Caso TENHA avalia√ß√µes -->
                                                         <c:if test="${filme.qtd_com >= 1}">
-                                                            <!-- Formatando MÈdia de AvaliaÁıes -->
+                                                            <!-- Formatando M√©dia de Avalia√ß√µes -->
                                                             <fmt:formatNumber var="fil_media" value="${filme.media}" maxFractionDigits="2" />
-                                                            <!-- Inteiro da MÈdia para C·culos -->
+                                                            <!-- Inteiro da M√©dia para C√°culos -->
                                                             <fmt:parseNumber var="fil_media_int" value="${fil_media}" integerOnly="true" type="number" />
                                                             
                                                             <h2 class="text-warning d-flex align-items-center">
@@ -89,13 +89,13 @@
 <div class="row">
     <div class="col-md-12">
         
-        <!-- Bloco de Coment·rios -->
+        <!-- Bloco de Coment√°rios -->
         <div class='card bg-light' id='bloco_cmt'>
-            <div class='card-header text-primary'><h2 class='card-title'>AvaliaÁıes (${filme.qtd_com})</h2></div>
+            <div class='card-header text-primary'><h2 class='card-title'>Avalia√ß√µes (${filme.qtd_com})</h2></div>
                 <div class='card-body'>                    
                     <div class='card-columns bg-light'>
                         
-                            <!-- Cards de Coment·rios -->
+                            <!-- Cards de Coment√°rios -->
                             <c:forEach var="com" items="${comentarios.rows}">
                                 
                                 <div class='card bg-class'>
@@ -110,10 +110,10 @@
                                         </c:forEach>
                                     </span>
                                         
-                                    <!-- h3 class='card-subtitle text-muted d-inline'>NOTA_DESCRI«√O</h3 -->
+                                    <!-- h3 class='card-subtitle text-muted d-inline'>NOTA_DESCRI√á√ÉO</h3 -->
                                     
                                     <c:if test="${com.Com_Usuario == sessionScope.Usu_Codigo}">
-                                        <!-- Menu OpÁıes -->
+                                        <!-- Menu Op√ß√µes -->
                                         <div class='float-right dropright d-inline ml-2'>
                                             <button type='button' class='btn btn-secondary' id='opComentario_NUMERO' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class="fa fa-bars" aria-hidden="false"></i></button>
                                             <div class='dropdown-menu' aria-labelledby='opComentario$com_cod'>
@@ -123,34 +123,34 @@
                                          </div>
                                             
                                         <div class="accordion" id='comBloco_${com.Com_Codigo}'>
-                                        <!-- Info Coment·rio-->
+                                        <!-- Info Coment√°rio-->
                                         <div id="infoCom_${com.Com_Codigo}" class="collapse show"data-parent='#comBloco_${com.Com_Codigo}'>
                                             <blockquote class='blockquote mb-0'>
                                                 <p>${com.Com_Comentario}</p>
                                                 <footer class='blockquote-footer d-flex justify-content-end'>
-                                                    <!-- Formatando Data Coment·rio -->
-                                                    <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy '‡s' hh:mm"/>
+                                                    <!-- Formatando Data Coment√°rio -->
+                                                    <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy '√†s' hh:mm"/>
                                                     ${com.Usu_Nome}
-                                                    <cite title='TÌtulo da fonte'>, ${Com_Data}</cite>									
+                                                    <cite title='T√≠tulo da fonte'>, ${Com_Data}</cite>									
                                                 </footer> 
                                             </blockquote>
                                         </div>
 
-                                        <!-- Formul·rio para EdiÁ„o de Coment·rio -->
+                                        <!-- Formul√°rio para Edi√ß√£o de Coment√°rio -->
                                         <div id="editaCom_${com.Com_Codigo}" class="collapse" data-parent='#comBloco_${com.Com_Codigo}'>
                                             <form id="form_editaCom_${com.Com_Codigo}" class="form-group text-right" method="POST" action="reagirComentario.jsp">
                                                 
-                                                <p class="text-left">AvaliaÁ„o:</p>                                                
+                                                <p class="text-left">Avalia√ß√£o:</p>                                                
                                                 <select name="Fil_Avaliacao" class="form-control" form="form_editaCom_${com.Com_Codigo}">
-                                                    <option value="1" ${com.Com_Avaliacao == 1 ? "selected" : ""}>1 - PÈssimo</option>
+                                                    <option value="1" ${com.Com_Avaliacao == 1 ? "selected" : ""}>1 - P√©ssimo</option>
                                                     <option value="2" ${com.Com_Avaliacao == 2 ? "selected" : ""}>2 - Ruim</option>
                                                     <option value="3" ${com.Com_Avaliacao == 3 ? "selected" : ""}>3 - Mais ou Menos</option>
                                                     <option value="4" ${com.Com_Avaliacao == 4 ? "selected" : ""}>4 - Bom</option>
                                                     <option value="5" ${com.Com_Avaliacao == 5 ? "selected" : ""}>5 - Excelente</option>
                                                 </select>
                                                 
-                                                <p class="text-left">Coment·rio:</p>
-                                                <textarea class="form-control" rows="5" name="editaComentario" placeholder="Digite seu coment·rio aqui..." required>${com.Com_Comentario}</textarea><br>
+                                                <p class="text-left">Coment√°rio:</p>
+                                                <textarea class="form-control" rows="5" name="editaComentario" placeholder="Digite seu coment√°rio aqui..." required>${com.Com_Comentario}</textarea><br>
                                                 <input type="hidden" name="Com_Codigo"  value="${com.Com_Codigo}"/>
                                                 <input type="hidden" name="id" value="${filme.Fil_Codigo}" />                                            
                                                 <input class="btn btn-secondary" type="reset" value="CANCELAR"  data-target='#infoCom_${com.Com_Codigo}' data-toggle='collapse' aria-expanded='true'/>
@@ -160,28 +160,28 @@
                                     </div>      
                                     </c:if>
                                     
-                                    <!-- Se N√O HOUVER Sess„o Ativa, ou Coment·rio N√O FOR do usu·rio atual -->
+                                    <!-- Se N√ÉO HOUVER Sess√£o Ativa, ou Coment√°rio N√ÉO FOR do usu√°rio atual -->
                                     <c:if test="${empty sessionScope.Usu_Codigo || com.Com_Usuario != sessionScope.Usu_Codigo}">
-                                        <!-- Info Coment·rio-->
+                                        <!-- Info Coment√°rio-->
                                         <blockquote class='blockquote mb-0'>
                                             <p>${com.Com_Comentario}</p>
                                             <footer class='blockquote-footer d-flex justify-content-end'>
-                                                <!-- Formatando Data Coment·rio -->
-                                                <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy '‡s' hh:mm"/>
+                                                <!-- Formatando Data Coment√°rio -->
+                                                <fmt:formatDate var="Com_Data" value="${com.Com_Data}" pattern="dd 'de' MMMM',' yyyy '√†s' hh:mm"/>
                                                 ${com.Usu_Nome}
-                                                <cite title='TÌtulo da fonte'>, ${Com_Data}</cite>									
+                                                <cite title='T√≠tulo da fonte'>, ${Com_Data}</cite>									
                                             </footer> 
                                         </blockquote>
                                     </c:if>
 
-                                    <!-- Linha DivisÛria -->
+                                    <!-- Linha Divis√≥ria -->
                                     <hr>
                                     <div class="d-flex justify-content-end">
-                                        <!-- Links para InteraÁ„o com os Coment·rios -->
-                                        <a href='#' class='card-link' data-toggle="collapse" data-target="#addCom_${com.Com_Codigo}" data-tooltip="tooltip" title='Ver / Adicionar Coment·rios' data-placement="bottom">
+                                        <!-- Links para Intera√ß√£o com os Coment√°rios -->
+                                        <a href='#' class='card-link' data-toggle="collapse" data-target="#addCom_${com.Com_Codigo}" data-tooltip="tooltip" title='Ver / Adicionar Coment√°rios' data-placement="bottom">
                                             <!-- Comentarios (${com.qtd_addCom}) --> <i class="fa fa-comment"></i> (${com.qtd_addCom})
                                         </a>
-                                        <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&curtirComentario=${com.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Curtir Coment·rio" data-placement="bottom">
+                                        <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&curtirComentario=${com.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Curtir Coment√°rio" data-placement="bottom">
                                             
                                             <c:if test="${not empty sessionScope.Usu_Codigo}">
                                                 <sql:query dataSource="${conexao}" var="rc">
@@ -206,7 +206,7 @@
                                             </c:choose>
                                             
                                         </a>  
-                                        <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&descurtirComentario=${com.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Descurtir Coment·rio" data-placement="bottom">
+                                        <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&descurtirComentario=${com.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Descurtir Coment√°rio" data-placement="bottom">
                                            <c:choose>
                                             <c:when test="${not empty rc.rows and rc.rows[0].Rc_Dislike}">
                                                 <!-- strong>Descurtido (${com.qtd_dislike})</strong -->
@@ -226,15 +226,15 @@
                                     <div class="collapse text-right" id="addCom_${com.Com_Codigo}">
                                         <hr />
                                         
-                                        <!-- Formul·rio para Comentar um Coment·rio -->
+                                        <!-- Formul√°rio para Comentar um Coment√°rio -->
                                         <form id="form_addCom_${com.Com_Codigo}" class="form-group" method="POST" action="reagirComentario.jsp">
-                                            <textarea class="form-control" rows="5"  name="addComentario" placeholder="Digite seu coment·rio aqui..." required></textarea><br>
+                                            <textarea class="form-control" rows="5"  name="addComentario" placeholder="Digite seu coment√°rio aqui..." required></textarea><br>
                                             <input type="hidden" name="Com_Codigo"  value="${com.Com_Codigo}"/>
                                             <input type="hidden" name="id" value="${filme.Fil_Codigo}" />
                                             <input class="btn btn-primary" type="submit" value="COMENTAR" form="form_addCom_${com.Com_Codigo}" />
                                         </form>
                                         
-                                        <!-- Recupera Coment·rios de Coment·rios -->
+                                        <!-- Recupera Coment√°rios de Coment√°rios -->
                                         <c:if test="${com.qtd_addCom > 0}">
                                             <sql:query dataSource="${conexao}" var="add">
                                                 SELECT c.*,
@@ -266,7 +266,7 @@
 
                                                             </sql:query>
                                                         </c:if>
-                                                            <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&curtirComentario=${addCom.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Curtir Coment·rio" data-placement="bottom">
+                                                            <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&curtirComentario=${addCom.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Curtir Coment√°rio" data-placement="bottom">
                                                             <c:choose>
                                                                 <c:when test="${not empty addRc.rows and addRc.rows[0].Rc_Like}">
                                                                     <!-- strong>Curtido (${addCom.qtd_like})</strong -->
@@ -279,7 +279,7 @@
                                                                
                                                             </c:choose>
                                                         </a>   
-                                                        <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&descurtirComentario=${addCom.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Descurtir Coment·rio" data-placement="bottom">
+                                                        <a href='reagirComentario.jsp?id=${filme.Fil_Codigo}&descurtirComentario=${addCom.Com_Codigo}' class='card-link' data-tooltip="tooltip" title="Descurtir Coment√°rio" data-placement="bottom">
                                                             <c:choose>
                                                                 <c:when test="${not empty addRc.rows and addRc.rows[0].Rc_Dislike}">
                                                                     <!-- strong>Curtido (${addCom.qtd_dislike})</strong -->
@@ -293,7 +293,7 @@
                                                             </c:choose>
                                                         </a>   
                                                       <c:if test="${not empty sessionScope.Usu_Codigo and addCom.Com_Usuario == sessionScope.Usu_Codigo}">
-                                                          <a href="reagirComentario.jsp?id=${filme.Fil_Codigo}&excluirAddCom=${addCom.Com_Codigo}" class='btn btn-danger text-white' data-tooltip='tooltip' title="Excluir Coment·rio" data-placement="bottom"><i class="fa fa-trash" aria-hidden="false"></i></a>
+                                                          <a href="reagirComentario.jsp?id=${filme.Fil_Codigo}&excluirAddCom=${addCom.Com_Codigo}" class='btn btn-danger text-white' data-tooltip='tooltip' title="Excluir Coment√°rio" data-placement="bottom"><i class="fa fa-trash" aria-hidden="false"></i></a>
                                                       </c:if>
                                                       
                                                     </div>
@@ -312,7 +312,7 @@
                         
                     </div>
                     
-                    <!-- Caso n„o haja coment·rios -->
+                    <!-- Caso n√£o haja coment√°rios -->
                     <c:if test="${filme.qtd_com == 0}">
                         <div class='text-center'>
                             <h2 class='text-muted'>Seja o primeiro a comentar clicando abaixo!</h2>
@@ -328,32 +328,32 @@
                 
     </div>
                 
-    <!-- Bloco Para Coment·rios -->
+    <!-- Bloco Para Coment√°rios -->
     <div class="card bg-light">
-        <!-- Testa se usu·rio J· comentou - Vari·vel instanciada no DAO-->
+        <!-- Testa se usu√°rio J√° comentou - Vari√°vel instanciada no DAO-->
         <c:if test="${jaComentou && not empty sessionScope.Usu_Codigo}">
             <div class="card-body text-center text-primary">
-                VocÍ j· Avaliou este Filme ; )
+                Voc√™ j√° Avaliou este Filme ; )
             </div>
         </c:if>
         <c:if test="${not jaComentou || empty sessionScope.Usu_Codigo}">
             <div class="card-header text-center">
-                <h3 class="card-title">Adicionar AvaliaÁ„o</h3>
+                <h3 class="card-title">Adicionar Avalia√ß√£o</h3>
                 <button class="btn btn-primary" data-toggle="collapse" data-target="#frm-comentario">Comentar</button>
             </div>
             <div class="card-body collapse" id="frm-comentario">									
                 <form class="form-group" method="POST" action="reagirComentario.jsp">
-                    <label for="nota">AvaliaÁ„o:</label>
+                    <label for="nota">Avalia√ß√£o:</label>
                     <select name="Fil_Avaliacao" class="form-control w-50" id="nota">
-                        <option value="1">1 - PÈssimo</option>
+                        <option value="1">1 - P√©ssimo</option>
                         <option value="2">2 - Ruim</option>
                         <option value="3">3 - Mais ou Menos</option>
                         <option value="4">4 - Bom</option>
                         <option value="5">5 - Excelente</option>
                     </select>
 
-                    <label for="comment">Coment·rio:</label>
-                    <textarea class="form-control" rows="5" id="comment"  name="Comentario" placeholder="Digite seu coment·rio aqui..." required></textarea><br>
+                    <label for="comment">Coment√°rio:</label>
+                    <textarea class="form-control" rows="5" id="comment"  name="Comentario" placeholder="Digite seu coment√°rio aqui..." required></textarea><br>
 
                     <input type="hidden" name="Fil_Codigo" value="${filme.Fil_Codigo}">
                     <input type="hidden" name="id" value="${filme.Fil_Codigo}">
@@ -368,22 +368,22 @@
     <c:choose>
         <c:when test="${param.erro == 1}">
             <script>
-                alert("VocÍ pode comentar apenas uma vez!");
+                alert("Voc√™ pode comentar apenas uma vez!");
             </script>
         </c:when>
         <c:when test="${param.erro == 2}">
             <script>
-                alert("Necess·rio estar logado para executar essa aÁ„o!");
+                alert("Necess√°rio estar logado para executar essa a√ß√£o!");
             </script>
         </c:when>
         <c:when test="${param.erro == 3}">
             <script>
-                alert("VocÍ n„o È permitido executar essa aÁ„o!");
+                alert("Voc√™ n√£o √© permitido executar essa a√ß√£o!");
             </script>
         </c:when>
         <c:when test="${param.sucesso == 1}">
             <script>
-                alert("OperaÁ„o Realizada com Sucesso!");
+                alert("Opera√ß√£o Realizada com Sucesso!");
             </script>
         </c:when>
     </c:choose>  
@@ -398,14 +398,14 @@
         <div class='modal-dialog modal-dialog-centered' role='document'>
             <div class='modal-content'>
                 <div class='modal-header'>
-                    <h5 class='modal-title' id='exc_cmt'>Excluir Coment·rio</h5>
+                    <h5 class='modal-title' id='exc_cmt'>Excluir Coment√°rio</h5>
                     <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
                 </div>
 
                 <div class='modal-body'>
-                    <p>VocÍ realmente deseja excluir esse coment·rio?</p>
+                    <p>Voc√™ realmente deseja excluir esse coment√°rio?</p>
                 </div>
 
                 <div class='modal-footer'>

@@ -7,6 +7,6 @@
 <sql:setDataSource
     var="conexao"
     driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost:3306/vs012019web"
+    url="jdbc:mysql://localhost/vs012019web"
     user="root"
     password="" />

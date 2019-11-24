@@ -8,7 +8,7 @@
             <div class="col-md-12"> 
                 <div id="carroselWallpapers" class="carousel slide" data-ride="carousel" data-interval="3000" style="height:100%">
                     
-                    <!-- Botões para cada Slide-->
+                    <!-- BotÃµes para cada Slide-->
                     <ol class="carousel-indicators">
                         
                         <c:forEach var="filme" items="${filmes.rows}" varStatus="i">
@@ -24,9 +24,9 @@
                             <!-- Deixar ativo apenas a primeira imagem -->
                             <div class="carousel-item ${i.index == 0 ? "active" : ""}">
                                 
-                                <!-- Redireciona para a página Detalhe do Filme -->
+                                <!-- Redireciona para a pÃ¡gina Detalhe do Filme -->
                                 <a href="../filme/index.jsp?id=${filme.Fil_Codigo}">
-                                    <img class="d-block w-100" src="../resources/${filme.Fil_Wallpaper}" alt="Slide ${i.index + 1}">
+                                    <img class="d-block w-100" src="../resources/img/filmes/${filme.Fil_Wallpaper}" alt="Slide ${i.index + 1}">
                                 </a>
                                 
                                 <div class="carousel-caption d-none d-md-block rounded" style="background-color: rgba(0, 0, 0, 0.7)">
@@ -38,7 +38,7 @@
                         </c:forEach>
                     </div>
                     
-                    <!-- Setas de Próximo/Anterior Slides -->
+                    <!-- Setas de PrÃ³ximo/Anterior Slides -->
                     <a class="carousel-control-prev" href="#carroselWallpapers" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Anterior</span>
@@ -46,7 +46,7 @@
                     
                     <a class="carousel-control-next" href="#carroselWallpapers" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Próximo</span>
+                        <span class="sr-only">PrÃ³ximo</span>
                     </a>
                 </div>
             </div>            

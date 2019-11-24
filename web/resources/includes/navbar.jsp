@@ -17,19 +17,29 @@
                 <a class="nav-link" href="../listaFilmes">FILMES</span></a>
               </li>
               
-              <!-- Se HOUVER Sess„o Ativa -->
+              <!-- Se HOUVER Sess√£o Ativa -->
               <c:if test="${not empty sessionScope.Usu_Codigo}">
                 
                 <c:if test="${sessionScope.Usu_Perfil == 3}">
-                  <!-- Verifica se È um Perfil Administrativo -->
-                  <li clss="nav-item">
-                    <a class="nav-link" href="dashboard.php">Administrativo</span></a>
+                  <!-- Verifica se √© um Perfil Administrativo -->
+                  <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="admin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administrativo
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="admin">
+                            <a class="dropdown-item" href="../cadastros/Ator/Menu/index.jsp">Ator</a>
+                            <a class="dropdown-item" href="../cadastros/Classificacao/Menu/index.jsp">Classifica√ß√£o</a>
+                            <a class="dropdown-item" href="../cadastros/Distribuidora/Menu/index.jsp">Distribuidora</a>
+                            <a class="dropdown-item" href="../cadastros/Filme/Menu/index.jsp">Filme</a>
+                            <a class="dropdown-item" href="../cadastros/Genero/Menu/index.jsp">Genero</a>
+                            <a class="dropdown-item" href="../cadastros/Usuario/Menu/index.jsp">Usuario</a>
+                        </div>
                   </li>
                 </c:if>
 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="opcoes_login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Ol· ${sessionScope.Usu_Nome}
+                      Ol√° ${sessionScope.Usu_Nome}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="opcoes_login">
                       <!-- a class="dropdown-item" href="alt-cadastro.php">Minha Conta</a -->
@@ -39,7 +49,7 @@
                 </li>
               </c:if>
                 
-              <!-- Se N√O HOUVER Sess„o Ativa -->
+              <!-- Se N√ÉO HOUVER Sess√£o Ativa -->
               <c:if test="${empty sessionScope.Usu_Codigo}">
                 <li clss="nav-item">
                     <a class='nav-link' href='../login'><button class='btn btn-light text-dark'>LOGAR</button></a>

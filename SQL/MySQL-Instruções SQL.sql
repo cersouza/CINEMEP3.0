@@ -110,6 +110,7 @@ CREATE TABLE `filmes` (
   `Fil_Codigo` int(11) NOT NULL,
   `Fil_Titulo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Fil_Sinopse` text COLLATE utf8_unicode_ci,
+  `Fil_url` text COLLATE utf8_unicode_ci,
   `Fil_Foto` text COLLATE utf8_unicode_ci,
   `Fil_Lancamento` date DEFAULT NULL,
   `Fil_Tempo` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,

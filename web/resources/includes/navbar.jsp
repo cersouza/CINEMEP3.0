@@ -55,7 +55,7 @@
                     <a class='nav-link' href='../login'><button class='btn btn-light text-dark'>LOGAR</button></a>
                 </li>
                 <li clss="nav-item">
-                    <a class='nav-link' href='cadastro.jsp'>CADASTRAR-SE</a>
+                    <a class='nav-link' href='../cadUsuario/index.jsp'>CADASTRAR-SE</a>
                 </li>            
               </c:if>
                 

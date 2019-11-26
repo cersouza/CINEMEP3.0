@@ -1,5 +1,5 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
     <h1 class="page-header">Cadastro de Moderador</h1>
@@ -27,7 +27,7 @@
         </c:if>    
         
         <c:if test="${IsErro1 == 's'}">
-            <%@include file="../../conexao.jsp" %>
+            <%@include file="../../includes/conexao.jsp" %>
             <sql:update dataSource="${conexao}" var="r">
                 INSERT INTO moderador (mod_nome,mod_usuario,mod_senha,mod_email,mod_situacao,mod_telefone,mod_cpf)
 				VALUES (?,?,?,?,?,?,?);
@@ -168,4 +168,4 @@
     </form>
 </div>	
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

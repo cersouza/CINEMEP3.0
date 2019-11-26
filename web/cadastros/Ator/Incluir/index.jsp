@@ -1,5 +1,5 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
     <h1 class="page-header">Cadastro de Ator</h1>
@@ -12,11 +12,16 @@
             <c:set var="IsErro1" value="f" />
         </c:if>    
         
+        <c:if test="${empty(param.Atr_DataNasc)}">
+            <c:set var="IsErro1" value="f" />
+        </c:if>    
+        
         <c:if test="${IsErro1 == 's'}">
-            <%@include file="../../conexao.jsp" %>
+            <%@include file="../../includes/conexao.jsp" %>
             <sql:update dataSource="${conexao}" var="r">
-                INSERT INTO Ator (atr_nome) VALUES (?);
+                INSERT INTO Ator (atr_nome,Atr_DataNasc) VALUES (?,?);
                 <sql:param value="${param.atr_nome}" />
+                <sql:param value="${param.Atr_DataNasc}" />
             </sql:update>
             
             <c:if test="${not (r>0)}">
@@ -38,6 +43,10 @@
                     <h1><strong>Erro!</strong></h1>
                     <p>Ocorreram o(s) seguinte(s) erro(s): <br />
                         <c:if test="${empty(param.atr_nome)}">
+                            Você esqueceu de digitar um nome.<br />
+                        </c:if> 
+                            
+                        <c:if test="${empty(param.Atr_DataNasc)}">
                             Você esqueceu de digitar um nome.<br />
                         </c:if> 
 
@@ -67,11 +76,23 @@
                         value="<c:out value="${param.atr_nome}"/>"
                     </c:if>
                 />                    
-            </div>					
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label>Data de nascimento</label>
+                    <input type="date" name="Atr_DataNasc" class="form-control"
+                        data-date-format="DD MM YYYY" 
+                        placeholder="Digit e uma data de nascimento." 
+                        <c:if test="${IsErro1 == 'f'}">
+                            value="<c:out value="${param.Atr_DataNasc}"/>"
+                        </c:if>
+                    />
+                </div>           
+            </div>           
         </div>			
 
         <input type="hidden" name="enviou" value="True" />
     </form>
 </div>	
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

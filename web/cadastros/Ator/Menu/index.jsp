@@ -1,6 +1,6 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
-<%@include file="../../conexao.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
+<%@include file="../../includes/conexao.jsp" %>
 
     <c:set var="exiba" value="10" />
     <c:choose>
@@ -207,4 +207,4 @@
 </div>
 </div>
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

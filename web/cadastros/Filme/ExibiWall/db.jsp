@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <%@include file="../../conexao.jsp" %>
+        <%@include file="../../includes/conexao.jsp" %>
         <sql:update dataSource="${conexao}" var="resultado">
             UPDATE FILMES SET FIL_EXIBIWALLPAPER=IF(fil_exibiwallpaper='Sim','Não','Sim') WHERE FIL_CODIGO=?
                 <sql:param value="${param.id}" />

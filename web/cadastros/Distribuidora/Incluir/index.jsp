@@ -1,5 +1,5 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
     <h1 class="page-header">Cadastro de Distribuidora</h1>
@@ -42,7 +42,7 @@
         </c:if>
         
         <c:if test="${IsErro1 == 's'}">
-            <%@include file="../../conexao.jsp" %>
+            <%@include file="../../includes/conexao.jsp" %>
             <sql:update dataSource="${conexao}" var="r">
                 INSERT INTO distribuidora (dis_razaosocial,dis_nomefantasia,dis_cnpj,dis_ie,dis_site,dis_email,dis_endereco,dis_bairro,dis_cidade,dis_estado,dis_numero)
 		VALUES (?,?,?,?,?,?,?,?,?,?,?);
@@ -284,4 +284,4 @@
     </form>
 </div>	
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

@@ -1,6 +1,6 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
-<%@include file="../../conexao.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
+<%@include file="../../includes/conexao.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
     <h1 class="page-header">Cadastro de Usuário</h1>
@@ -20,14 +20,17 @@
         <c:if test="${empty(param.usu_email)}">
             <c:set var="IsErro1" value="f" />
         </c:if>
-        
+        <c:if test="${empty(param.usu_perfil)}">
+            <c:set var="IsErro1" value="f" />
+        </c:if>
         <c:if test="${IsErro1 == 's'}">
             <sql:update dataSource="${conexao}" var="r">
-                UPDATE Usuario set usu_nome=?,usu_usuario=?,usu_senha=?,usu_email=?,usu_situacao='Ativo' where usu_codigo = ?;
+                UPDATE Usuario set usu_nome=?,usu_usuario=?,usu_senha=?,usu_email=?,usu_situacao='Ativo',usu_perfil=? where usu_codigo = ?;
                 <sql:param value="${param.usu_nome}" />
                 <sql:param value="${param.usu_usuario}" />
                 <sql:param value="${param.usu_senha}" />
                 <sql:param value="${param.usu_email}" />
+                <sql:param value="${param.usu_perfil}" />
                 <sql:param value="${param.id}" />
             </sql:update>
             
@@ -60,6 +63,9 @@
                         </c:if> 
                         <c:if test="${empty(param.usu_email)}">
                             Você esqueceu de digitar o e-mail.<br />
+                        </c:if> 
+                        <c:if test="${empty(param.usu_perfil)}">
+                            Você esqueceu de escolher o perfil.<br />
                         </c:if> 
                         <c:if test="${eS1 == 'f'}">
                             Erro na execução do SQL.<br />
@@ -108,17 +114,38 @@
 
                         </div>	
                     </div>		
+                    
+                    <div class="row">
+                        <div class="col-md-5">				
+                        <label>E-mail</label>
+                        <input type="email" name="usu_email" maxlength="100" class="form-control"
+                            placeholder="Digite o e-mail do usuário" 
+                            value="<c:out value="${i.usu_email}"/>" />
+                        </div>
+                        
+                        <div class="col-md-2">
+                        </div>
+                        
+                        <div class="col-md-5">				
+                            <label>Perfil</label>
+                            <select name="usu_perfil" id="usu_perfil" class="form-control w-3">
+                                <sql:query dataSource="${conexao}" var="zr">
+                                    select Prf_Codigo,Prf_Descricao from perfil;
+                                </sql:query>
 
-                    <label>E-mail</label>
-                    <input type="email" name="usu_email" maxlength="100" class="form-control"
-                        placeholder="Digite o e-mail do usuário" 
-                        value="<c:out value="${i.usu_email}"/>" />
+                                <c:forEach var="z" items="${zr.rows}">
+                                    <option value="${z.Prf_Codigo}">${z.Prf_Descricao}</option>
+                                </c:forEach>
+                            </select>
+                        </div>	
+                    </div>
                 </div>					
-            </div>	
+            </div>	        
+            <script>document.getElementById("usu_perfil").value = <c:out value="${i.usu_perfil}"/></script>            
         </c:forEach>    
         <input type="hidden" name="id" value="${param.id}" />
  	<input type="hidden" name="enviou" value="True" />
     </form>
 </div>	
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

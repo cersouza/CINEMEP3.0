@@ -1,6 +1,6 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
-<%@include file="../../conexao.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
+<%@include file="../../includes/conexao.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
     <h1 class="page-header">Cadastro de Ator</h1>
@@ -21,7 +21,6 @@
                 
         
         <c:if test="${IsErro1 == 's'}">
-            <%@include file="../../conexao.jsp" %>
             <sql:update dataSource="${conexao}" var="r">
                 UPDATE AtorFilme SET Atfl_Fil_Codigo=?,Atfl_Papel=?,Atfl_Importancia=?
                 where Atfl_Codigo=?;
@@ -121,4 +120,4 @@
     </form>
 </div>	
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

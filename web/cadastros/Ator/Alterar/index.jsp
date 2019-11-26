@@ -1,6 +1,6 @@
-<%@include file="../../../resources/includes/header.jsp" %>
-<%@include file="../../../resources/includes/navbar.jsp" %>
-<%@include file="../../conexao.jsp" %>
+<%@include file="../../includes/header.jsp" %>
+<%@include file="../../includes/navbar.jsp" %>
+<%@include file="../../includes/conexao.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
     <h1 class="page-header">Cadastro de Ator</h1>
@@ -11,13 +11,18 @@
 
         <c:if test="${empty(param.atr_nome)}">
             <c:set var="IsErro1" value="f" />
-        </c:if>    
+        </c:if> 
+        
+        <c:if test="${empty(param.Atr_DataNasc)}">
+            <c:set var="IsErro1" value="f" />
+        </c:if>
         
         <c:if test="${IsErro1 == 's'}">
             <sql:update dataSource="${conexao}" var="r">
-                update ator set atr_nome=?
+                update ator set atr_nome=?,Atr_DataNasc=?
                 where atr_codigo=?
                 <sql:param value="${param.atr_nome}" />
+                <sql:param value="${param.Atr_DataNasc}" />
                 <sql:param value="${param.id}" />
             </sql:update>
             
@@ -75,10 +80,22 @@
                     />                    
                 </div>					
             </div>			
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label>Data de nascimento</label>
+                    <input type="date" name="Atr_DataNasc" class="form-control"
+                        data-date-format="DD MM YYYY" 
+                        placeholder="Digit e uma data de nascimento." 
+                        <c:if test="${IsErro1 == 'f'}">
+                            value="<c:out value="${param.Atr_DataNasc}"/>"
+                        </c:if>
+                    />
+                </div> 
+            </div>			
         </c:forEach>
         <input type="hidden" name="id" value="${param.id}" />
         <input type="hidden" name="enviou" value="True" />
     </form>
 </div>	
 
-<%@include file="../../../resources/includes/footer.jsp" %>
+<%@include file="../../includes/footer.jsp" %>

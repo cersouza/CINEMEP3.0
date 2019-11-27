@@ -26,7 +26,7 @@
                                 
                                 <!-- Redireciona para a página Detalhe do Filme -->
                                 <a href="../filme/index.jsp?id=${filme.Fil_Codigo}">
-                                    <img class="d-block w-100" src="../resources/${filme.Fil_Wallpaper}" alt="Slide ${i.index + 1}">
+                                    <img class="d-block w-100" src="../resources/img/filmes/${filme.Fil_Wallpaper}" alt="Slide ${i.index + 1}">
                                 </a>
                                 
                                 <div class="carousel-caption d-none d-md-block rounded" style="background-color: rgba(0, 0, 0, 0.7)">

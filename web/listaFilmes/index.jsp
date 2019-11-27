@@ -5,26 +5,26 @@
 <div class="row">
        <div class="col-md-12"> 
            
-           <!-- ÃNICIO: Menu de Pesquisa Filmes-->
+           <!-- INICIO: Menu de Pesquisa Filmes-->
            <nav class="navbar navbar-light navbar-expand-lg bg-light">
-               <!-- BotÃ£o Toogler -->
+               <!-- Botão Toogler -->
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opcoes-lista-filmes" aria-controls="opcoes-lista-filmes" aria-expanded="false" aria-label="OpÃ§Ãµes de Pesquisa">
                    <span class="navbar-toggler-icon"></span>
                </button>
                
-               <!-- BotÃµes para Pesquisa de Filmes -->
+               <!-- Botões para Pesquisa de Filmes -->
                <div class="collapse navbar-collapse" id="opcoes-lista-filmes">
                    <ul class="navbar-nav">
                        
-                       <!-- BotÃ£o TODOS os Filmes-->
+                       <!-- Botão TODOS os Filmes-->
                        <li class="nav-item">
                            <a class="nav-link" href="../listaFilmes">Todos</a>
                        </li>
                        
-                       <!-- BotÃ£o para seleÃ§Ã£o por GÃªnero -->
+                       <!-- Botão para seleção por Gênero -->
                        <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#opcoes-class" role="button" aria-expanded="false" aria-controls="opcoes-class">
-                                GÃªneros
+                                Generos
                             </a>
                             <div class="collapse" id="opcoes-class">
                                 <div class="d-flex">   
@@ -35,14 +35,14 @@
                             </div>
                        </li>
                        
-                       <!-- BotÃ£o Para OrdenaÃ§Ã£o de Filmes-->
+                       <!-- Botao Para Ordenacao de Filmes-->
                        <li class="nav-item mx-2 d-none">
                             <div class="dropdown show">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Ordenar
                                 </a>
                                 
-                                <!-- Lista com tipos de OrdenaÃ§Ã£o-->
+                                <!-- Lista com tipos de Ordenacao-->
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <!--a class="dropdown-item" href="#">Melhores Avaliados</a>
                                     <a class="dropdown-item" href="#">Menos Avaliados</a -->
@@ -56,7 +56,7 @@
                         
                         <!-- Campo de Pesquisa de Filme por TÃ­tulo -->
                         <form class="form-inline" method="GET" action="index.jsp">
-                            <input class="form-control mr-sm-2" type="search" name="pesquisa" placeholder="Pesquisar TÃ­tulo Filme" aria-label="Pesquisar">
+                            <input class="form-control mr-sm-2" type="search" name="pesquisa" placeholder="Pesquisar Titulo Filme" aria-label="Pesquisar">
                             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pesquisar</button>
                         </form>
                     </ul>
@@ -91,23 +91,23 @@
 
                                             <!-- Detalhes do Filme -->
                                             <div class="col-md-10">
-                                                <!-- Formatando Data de LanÃ§amento -->
+                                                <!-- Formatando Data de Lançamento -->
                                                 <fmt:formatDate var="Fil_Lanc" value="${filme.Fil_Lancamento}" pattern="dd 'de' MMMM',' yyyy"/>
                                                 <small class="text-small">${filme.Fil_Tempo} / <a href="index.jsp?gen=${filme.Fil_GeneroDesc}" data-toggle="tooltip" title="Ir para Filmes de ${filme.Fil_GeneroDesc}">${filme.Fil_GeneroDesc}</a> / ${Fil_Lanc}</small>
                                                 <h3 class="card-title text-uppercase">${filme.Fil_Titulo} <img src="../resources/img/classificacao_${filme.Fil_Classificacao}.png" style="height:32px; width:auto;" /></h3>
                                                 <p class="card-text">${filme.Fil_Sinopse}</p>
                                                 
-                                                <!-- Caso NÃƒO TENHA avaliaÃ§Ãµes -->
+                                                <!-- Caso NÃO TENHA avaliações -->
                                                 <c:if test="${filme.qtd_com < 1}">
-                                                    <p class="card-text text-warning"> Ainda nÃ£o avaliado</p>
+                                                    <p class="card-text text-warning"> Ainda não avaliado</p>
                                                 </c:if>
                                                 
-                                                <!-- Caso TENHA avaliaÃ§Ãµes -->
+                                                <!-- Caso TENHA avaliações -->
                                                 <c:if test="${filme.qtd_com >= 1}">
-                                                    <!-- Formatando MÃ©dia de AvaliaÃ§Ãµes -->
+                                                    <!-- Formatando Média de Avaliações -->
                                                     <fmt:formatNumber var="fil_media" value="${filme.media}" maxFractionDigits="2" />
                                                 
-                                                    <!-- Inteiro da MÃ©dia para CÃ¡culos -->
+                                                    <!-- Inteiro da Média para Calculos -->
                                                     <fmt:parseNumber var="fil_media_int" value="${fil_media}" integerOnly="true" type="number" />
                                                         
                                                     <p class="card-text text-warning">
@@ -127,8 +127,8 @@
                                                              </c:choose>
                                                         </c:forEach>
                                                         
-                                                        <!-- Exibindo Quanidade de AvaliaÃ§Ãµes -->
-                                                        - ${filme.qtd_com} ${filme.qtd_com <= 1 ? "AvaliaÃ§Ã£o" : "AvaliaÃ§Ãµes"}
+                                                        <!-- Exibindo Quanidade de Avaliaçõµes -->
+                                                        - ${filme.qtd_com} ${filme.qtd_com <= 1 ? "Avaliacao" : "Avaliacoes"}
                                                     </p>
                                                 </c:if> 
                                                     
@@ -140,8 +140,10 @@
                                 </div>
                             </c:forEach>
                             
-                            <!-- Caso nÃ£o tenha Filmes cadastrados-->
-                            <!-- div class='card'><div class='card-body d-flex justify-content-center'><p class='text-secondary m-0'>NÃ£o hÃ¡ filmes cadastrados com o GÃªnero ou TÃ­tulo informado.</p></div></div></div -->
+                            <!-- Caso não tenha Filmes cadastrados-->
+                            <c:if test="${empty filmes}">
+                                <div class='card'><div class='card-body d-flex justify-content-center'><p class='text-secondary m-0'>Nao ha filmes cadastrados com o Genero ou Titulo informado.</p></div></div></div>
+                            </c:if>
                             
                         </div>
                     </div>

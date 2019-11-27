@@ -17,18 +17,18 @@
                 <a class="nav-link" href="../listaFilmes">FILMES</span></a>
               </li>
               
-              <!-- Se HOUVER Sessão Ativa -->
+              <!-- Se HOUVER Sessao Ativa -->
               <c:if test="${not empty sessionScope.Usu_Codigo}">
                 
                 <c:if test="${sessionScope.Usu_Perfil == 3}">
-                  <!-- Verifica se é um Perfil Administrativo -->
+                  <!-- Verifica se E um Perfil Administrativo -->
                   <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="admin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administrativo
                         </a>
                         <div class="dropdown-menu" aria-labelledby="admin">
                             <a class="dropdown-item" href="../cadastros/Ator/Menu/index.jsp">Ator</a>
-                            <a class="dropdown-item" href="../cadastros/Classificacao/Menu/index.jsp">Classificação</a>
+                            <a class="dropdown-item" href="../cadastros/Classificacao/Menu/index.jsp">Classificao</a>
                             <a class="dropdown-item" href="../cadastros/Distribuidora/Menu/index.jsp">Distribuidora</a>
                             <a class="dropdown-item" href="../cadastros/Filme/Menu/index.jsp">Filme</a>
                             <a class="dropdown-item" href="../cadastros/Genero/Menu/index.jsp">Genero</a>
@@ -39,17 +39,17 @@
 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="opcoes_login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Olá ${sessionScope.Usu_Nome}
+                      Ola ${sessionScope.Usu_Nome}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="opcoes_login">
-                      <!-- a class="dropdown-item" href="alt-cadastro.php">Minha Conta</a -->
-                      <hr />
+                      <!-- a class="dropdown-item" href="alt-cadastro.php">Minha Conta</a>
+                      <hr / -->
                       <a class="dropdown-item" href="../login/index.jsp?sair=true">Sair</a>                      
                   </div>
                 </li>
               </c:if>
                 
-              <!-- Se NÃO HOUVER Sessão Ativa -->
+              <!-- Se NAO HOUVER Sessao Ativa -->
               <c:if test="${empty sessionScope.Usu_Codigo}">
                 <li clss="nav-item">
                     <a class='nav-link' href='../login'><button class='btn btn-light text-dark'>LOGAR</button></a>

@@ -4,9 +4,19 @@
 <!-- Importando Biblioteca SQL -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 
-<sql:setDataSource
+<!-- Conexão Server XAMPP -->
+<!--sql:setDataSource
     var="conexao"
     driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost:3306/vs012019web"
+    url="jdbc:mysql://localhost/vs012019web"
     user="root"
-    password="" />
+    password="" / -->
+
+<!-- Conexão Server MySQL -->
+<sql:setDataSource 
+    var="conexao" 
+    driver="com.mysql.jdbc.Driver" 
+    url="jdbc:mysql://localhost/webIII" 
+    user="root" 
+    password="005870" 
+/>

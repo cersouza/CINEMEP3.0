@@ -12,7 +12,7 @@
                         <!-- Se Login estiver errado -->
                         <c:if test="${not empty param.error}">
                             <div class='alert alert-danger text-center' role='alert'>
-                                Usuário ou Senha incorreto(s)
+                                Usuario ou Senha incorreto(s)
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                                </button>
@@ -22,7 +22,7 @@
                         <!-- Se Deslogado -->
                         <c:if test="${not empty param.deslogado}">
                             <div class='alert alert-primary text-center' role='alert'>
-                                Obrigado por estar com a gente, até breve!
+                                Obrigado por estar com a gente, ate breve!
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                                </button>
